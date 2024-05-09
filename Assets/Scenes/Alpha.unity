@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 1108649137}
   - component: {fileID: 1108649138}
   - component: {fileID: 1108649140}
+  - component: {fileID: 1108649141}
   m_Layer: 0
   m_Name: Midas
   m_TagString: Player
@@ -680,6 +681,30 @@ MonoBehaviour:
   lightning_aoe: {fileID: 1080872715}
   attack_cooldown: 1
   attack_time: 0.5
+--- !u!114 &1108649141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108649132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f234ba4aafb64b0428c947733ee9567d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  accelerationTime: 0.1
+  canMoveSlow: 1
+  slowSpeed: 3
+  slowAxisName: Fire1
+  canMoveFast: 1
+  fastSpeed: 7
+  fastAxisName: Fire3
+  xAxisName: Horizontal
+  yAxisName: Vertical
+  useRawInput: 1
+  deadzone: 0.19
 --- !u!1 &1203199724
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +729,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203199724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cb87b2720c9f4a4581d854cb2ac5af0, type: 3}
   m_Name: 

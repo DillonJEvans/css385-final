@@ -51,14 +51,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        // Move();
         Look();
         DrawDebugLines();
     }
 
     private void FixedUpdate()
     {
-        rb2d.velocity = velocity;
+        // rb2d.velocity = velocity;
     }
 
 
