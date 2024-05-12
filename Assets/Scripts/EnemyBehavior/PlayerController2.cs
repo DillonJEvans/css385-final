@@ -36,7 +36,7 @@ public class PlayerController2 : MonoBehaviour
         // Shoot when spacebar is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
+            //Shoot();
         }
     }
 

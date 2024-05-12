@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 2f; // Speed at which the enemy moves towards the player
     public float initialAlpha = 1.0f; // Initial alpha value
     public int initialHealth = 4; // Initial health of the enemy
-    private int currentHealth; // Current health of the enemy
+    public int currentHealth; // Current health of the enemy
 
     //Dps Revision
     private float last_damage_time;
