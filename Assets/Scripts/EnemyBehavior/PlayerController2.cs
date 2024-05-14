@@ -71,7 +71,7 @@ public class PlayerController2 : MonoBehaviour
         // Check if health is depleted
         if (currentHealth <= 0)
         {
-            CameraFollower_.stop = true;
+            CameraFollower_.enabled = false;
             SpawnManager_.stop = true;
             Destroy(gameObject);
         }
