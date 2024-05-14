@@ -7,12 +7,14 @@ Does not rotate or animate the player.
 
 HOW TO USE:
 1. Make sure the player has a Rigidbody2D component.
-2. Attach the PlayerMovement component.
+2. Attach the PlayerMovement component to the player.
 3. Adjust the settings of the PlayerMovement component in the Unity editor.
 **/
 
 
 using UnityEngine;
+
+using static InputUtils;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -93,9 +95,10 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateDirection()
     {
         Vector2 input = new(
-            GetInputFromAxis(xAxisName, useRawInput, deadzone),
-            GetInputFromAxis(yAxisName, useRawInput, deadzone)
+            GetInputFromAxis(xAxisName, useRawInput),
+            GetInputFromAxis(yAxisName, useRawInput)
         );
+        direction = ApplyDeadzone(input, deadzone);
         direction = NormalizeIfNeeded(input);
     }
 
@@ -130,37 +133,5 @@ public class PlayerMovement : MonoBehaviour
             default:
                 return 0f;
         }
-    }
-
-
-    private Vector3 NormalizeIfNeeded(Vector3 vector)
-    {
-        if (vector.sqrMagnitude > 1f)
-        {
-            vector.Normalize();
-        }
-        return vector;
-    }
-
-    private float GetInputFromAxis(string axisName, bool useRawInput, float deadzone)
-    {
-        if (useRawInput)
-        {
-            float input = Input.GetAxisRaw(axisName);
-            if (Mathf.Abs(input) < deadzone)
-            {
-                input = 0f;
-            }
-            return input;
-        }
-        else
-        {
-            return Input.GetAxis(axisName);
-        }
-    }
-
-    private bool IsAxisPressed(string axisName)
-    {
-        return Input.GetAxisRaw(axisName) != 0f;
     }
 }
