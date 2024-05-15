@@ -5,6 +5,9 @@ using UnityEngine;
 public class MeleeBehavior : MonoBehaviour
 {
     private GameObject player;
+    //Dps Revision
+    private float last_damage_time;
+    public float damage_cooldown = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +20,16 @@ public class MeleeBehavior : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        // Check if the collider belongs to an enemy
-        if (other.gameObject.CompareTag("Player"))
+        if (Time.time > last_damage_time + damage_cooldown)
         {
-            player.GetComponent<PlayerController2>().TakeDamage();
+            last_damage_time = Time.time;
+            // Check if the collider belongs to an enemy
+            if (other.gameObject.CompareTag("Player"))
+            {
+                player.GetComponent<PlayerController2>().TakeDamage();
+            }
         }
     }
 }

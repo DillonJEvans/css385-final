@@ -11,9 +11,17 @@ public class BoltScript : MonoBehaviour
         {
             collision.gameObject.GetComponent<PylonScript>().ActivateEffect();
         }
+        //if (collision.gameObject.layer == 8 && collision.gameObject != gameObject.transform.parent.gameObject)
+        //{
+            //collision.gameObject.GetComponent<EnemyController>().TakeDamage();
+        //}
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (collision.gameObject.layer == 8 && collision.gameObject != gameObject.transform.parent.gameObject)
         {
-            collision.gameObject.GetComponent<EnemyScript>().ActivateEffect();
+            collision.gameObject.GetComponent<EnemyController>().TakeDamage();
         }
     }
 }

@@ -6,13 +6,15 @@ public class PlayerController2 : MonoBehaviour
 {
     public float speed = 5f; // Speed of the player movement
     public GameObject projectilePrefab; // Prefab of the projectile
+    public CameraFollower CameraFollower_;
+    public SpawnManager SpawnManager_;
 
     private Rigidbody2D rb;
     private Vector2 moveDirection; // Direction to move
 
     public float initialAlpha = 1.0f; // Initial alpha value
     public int initialHealth = 4; // Initial health of the enemy
-    private int currentHealth; // Current health of the enemy
+    public int currentHealth; // Current health of the enemy
     private SpriteRenderer spriteRenderer;
 
     void Start()
@@ -34,7 +36,7 @@ public class PlayerController2 : MonoBehaviour
         // Shoot when spacebar is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
+            //Shoot();
         }
     }
 
@@ -69,6 +71,8 @@ public class PlayerController2 : MonoBehaviour
         // Check if health is depleted
         if (currentHealth <= 0)
         {
+            CameraFollower_.enabled = false;
+            SpawnManager_.stop = true;
             Destroy(gameObject);
         }
     }

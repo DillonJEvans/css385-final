@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab2; // Prefab of the second type of enemy
     public float spawnIntervalMin = 2f; // Minimum time between spawns
     public float spawnIntervalMax = 5f; // Maximum time between spawns
+    public bool stop = false;
 
     private float nextSpawnTime; // Time to spawn the next enemy
 
@@ -20,7 +22,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         // Check if it's time to spawn a new enemy
-        if (Time.time >= nextSpawnTime)
+        if (Time.time >= nextSpawnTime && !stop)
         {
             SpawnEnemy();
 

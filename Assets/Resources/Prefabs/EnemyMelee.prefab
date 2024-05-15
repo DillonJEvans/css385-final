@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: -8551765723650356309}
   - component: {fileID: -6005266453525219621}
   - component: {fileID: 7568495777457733289}
-  - component: {fileID: 7514636338187213284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyMelee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.972549, g: 0.03137255, b: 0.03137255, a: 1}
   m_FlipX: 0
@@ -106,6 +105,8 @@ MonoBehaviour:
   moveSpeed: 2
   initialAlpha: 1
   initialHealth: 4
+  currentHealth: 0
+  damage_cooldown: 0.5
 --- !u!50 &-8551765723650356309
 Rigidbody2D:
   serializedVersion: 4
@@ -191,15 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769103491937ea0408fa847053011878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7514636338187213284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3095196481950726619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8df30129132e14abea8fe5acc06157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  damage_cooldown: 0.5
