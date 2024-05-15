@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    private NavMeshAgent agent;
     private Transform playerTransform; // Reference to the player's transform
     public float moveSpeed = 2f; // Speed at which the enemy moves towards the player
     public float initialAlpha = 1.0f; // Initial alpha value
@@ -18,10 +22,16 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        agent = GetComponent<NavMeshAgent>();
         currentHealth = initialHealth;
 
         // Find the player GameObject and get its transform
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Stop the agent from rotating to face the player,
+        // which would cause them to not be visible to the camera.
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     void Update()
@@ -29,8 +39,9 @@ public class EnemyController : MonoBehaviour
         // Move towards the player
         if (playerTransform != null)
         {
-            Vector3 direction = (playerTransform.position - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            // Vector3 direction = (playerTransform.position - transform.position).normalized;
+            // transform.position += direction * moveSpeed * Time.deltaTime;
+            agent.destination = playerTransform.position;
         }
     }
 
