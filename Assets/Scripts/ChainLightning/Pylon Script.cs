@@ -28,7 +28,7 @@ public class PylonScript : MonoBehaviour
 
     public void ActivateEffect()
     {
-        Debug.Log("hit");
+        Debug.Log("hit " + gameObject.name);
         //if hit by attack (layer check on collider itself); activate effect (assuming no activation cooldown)
         //Secondary case of already being active extending use case
         //if (Time.time > last_activation_time + activation_cooldown || active) {
