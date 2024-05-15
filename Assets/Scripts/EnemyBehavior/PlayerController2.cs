@@ -8,6 +8,7 @@ public class PlayerController2 : MonoBehaviour
     public GameObject projectilePrefab; // Prefab of the projectile
     public CameraFollower CameraFollower_;
     public SpawnManager SpawnManager_;
+    public GameObject AimingReticle_;
 
     private Rigidbody2D rb;
     private Vector2 moveDirection; // Direction to move
@@ -73,6 +74,7 @@ public class PlayerController2 : MonoBehaviour
         {
             CameraFollower_.enabled = false;
             SpawnManager_.stop = true;
+            Destroy(AimingReticle_);
             Destroy(gameObject);
         }
     }
