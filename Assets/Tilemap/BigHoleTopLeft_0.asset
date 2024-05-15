@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BigHoleTopLeft_0
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -2401651286741807746, guid: f1c7ee0ceb236004b903405c0d98189d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
   m_Transform:
     e00: 1
     e01: 0
