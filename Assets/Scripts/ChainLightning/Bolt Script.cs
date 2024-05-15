@@ -6,9 +6,11 @@ public class BoltScript : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Hit?" + gameObject.name + " on " + collision.gameObject.name);
         //check if collision is a pylon & not parent
-        if (collision.gameObject.layer == 7 && collision.gameObject != gameObject.transform.parent.gameObject)
+        if (collision.gameObject.layer == 7) //&& collision.gameObject != gameObject.transform.parent.gameObject)
         {
+            Debug.Log("Hit!");
             collision.gameObject.GetComponent<PylonScript>().ActivateEffect();
         }
         //if (collision.gameObject.layer == 8 && collision.gameObject != gameObject.transform.parent.gameObject)
