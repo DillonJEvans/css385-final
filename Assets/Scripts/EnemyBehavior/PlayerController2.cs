@@ -85,6 +85,7 @@ public class PlayerController2 : MonoBehaviour
         if (other.gameObject.CompareTag("Egg"))
         {
             TakeDamage();
+            Destroy(other.gameObject);
         }
     }
 }
