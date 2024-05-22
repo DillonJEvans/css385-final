@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Landmine : MonoBehaviour
 {
+    int damage = 3;
     bool destroyed;
     bool active = false;
     float explosion_length = 0.5f;
@@ -59,7 +60,7 @@ public class Landmine : MonoBehaviour
         {
             if (obj != null && obj.layer == 8)
             {
-                obj.GetComponent<EnemyController>().TakeDamage();
+                obj.GetComponent<EnemyController>().TakeDamage(damage);
             }
             else if (obj != null && obj.layer == 9)
             {

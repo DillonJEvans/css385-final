@@ -7,9 +7,9 @@ public class AttackScript : MonoBehaviour
 {
     public GameObject lightning_bolt;
     public GameObject lightning_aoe;
-    public float attack_cooldown;  //cooldown between attacks
-    public float attack_time;      //time of effect for attack (minimum 1 frame)
-    float last_attack_time; //time of last attack (must be set by attack)
+    //public float attack_cooldown;  //cooldown between attacks
+    //public float attack_time;      //time of effect for attack (minimum 1 frame)
+    //float last_attack_time; //time of last attack (must be set by attack)
     // Start is called before the first frame update
     void Start()
     {
@@ -19,24 +19,32 @@ public class AttackScript : MonoBehaviour
     void Update()
     {
         // RotationMovement();
-        if (Time.time > last_attack_time + attack_cooldown)
+        //if (//(Time.time > last_attack_time + attack_cooldown)
+        //{
+        if (Input.GetKey(KeyCode.Z) || Input.GetMouseButton(0))
         {
-            if (Input.GetKey(KeyCode.Z) || Input.GetMouseButton(0))
-            {
-                lightning_bolt.SetActive(true);
-                last_attack_time = Time.time;
-            }
-            else if (Input.GetKey(KeyCode.X) || Input.GetMouseButton(1))
-            {
-                lightning_aoe.SetActive(true);
-                last_attack_time = Time.time;
-            }
+            lightning_bolt.SetActive(true);
+            lightning_aoe.SetActive(false);
+            //last_attack_time = Time.time;
         }
-        else if (Time.time > last_attack_time + attack_time)
+        else if (Input.GetKey(KeyCode.X) || Input.GetMouseButton(1))
+        {
+            lightning_aoe.SetActive(true);
+            lightning_bolt.SetActive(false);
+            //last_attack_time = Time.time;
+        }
+        else
         {
             lightning_bolt.SetActive(false);
             lightning_aoe.SetActive(false);
         }
+        //}
+        /*
+        else if (Time.time > last_attack_time + attack_time)
+        {
+            lightning_bolt.SetActive(false);
+            lightning_aoe.SetActive(false);
+        }*/
 
     }
 }

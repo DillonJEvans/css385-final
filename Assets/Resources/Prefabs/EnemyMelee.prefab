@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  initialHealth: 4
+  initialHealth: 9
   currentHealth: 0
   damage_cooldown: 0.5
 --- !u!50 &-8551765723650356309

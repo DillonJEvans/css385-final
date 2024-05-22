@@ -42,16 +42,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         if (Time.time > last_damage_time + damage_cooldown)
         {
             last_damage_time = Time.time;
-            currentHealth--;
+            currentHealth -= damage;
 
             // Check if health is depleted
             if (currentHealth <= 0)
             {
+                currentHealth = 0;
                 Destroy(gameObject);
             }
         }
