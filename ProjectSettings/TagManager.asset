@@ -18,9 +18,9 @@ TagManager:
   - Pylon
   - Enemy
   - Player
-  - 
-  - 
-  - 
+  - Wall
+  - Door
+  - Enemy Attack
   - 
   - 
   - 
