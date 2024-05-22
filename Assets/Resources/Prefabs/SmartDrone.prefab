@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 3
 --- !u!1 &9039191907640401854
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  initialAlpha: 1
   initialHealth: 4
   currentHealth: 0
   damage_cooldown: 0.5
@@ -362,3 +362,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  target_player: 0

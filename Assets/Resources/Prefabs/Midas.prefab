@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 3
 --- !u!1 &7285166040472224895
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
 --- !u!60 &7598102260300939413
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -519,7 +521,6 @@ MonoBehaviour:
   CameraFollower_: {fileID: 0}
   SpawnManager_: {fileID: 0}
   AimingReticle_: {fileID: 0}
-  initialAlpha: 1
   initialHealth: 4
   currentHealth: 0
 --- !u!114 &2295235405958294834
@@ -536,8 +537,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightning_bolt: {fileID: 6221416713962491531}
   lightning_aoe: {fileID: 7285166040472224895}
-  attack_cooldown: 1
-  attack_time: 0.5
 --- !u!114 &1843088355015584357
 MonoBehaviour:
   m_ObjectHideFlags: 0
