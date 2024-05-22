@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PylonScript : MonoBehaviour
@@ -10,8 +11,12 @@ public class PylonScript : MonoBehaviour
     public float activation_time;      //time of effect (minimum 1 frame; 1 frame future use case for explosions)
     float last_activation_time;        //time of last effect (must be set on last activation)
 
+    public int uses_remaining = 3;
+
+    public List<GameObject> drones;
     void Start()
     {
+        last_activation_time = -4;
     }
 
     void Update()
@@ -22,25 +27,24 @@ public class PylonScript : MonoBehaviour
             Debug.Log("Deactivate");
             aoe_field.SetActive(false);
             aoe_active = false;
+            uses_remaining--;
+            if (uses_remaining == 0)
+            {
+                drones.Remove(gameObject);
+                Destroy(gameObject);
+            }
             last_activation_time = Time.time;
         }
     }
 
-    public void ActivateEffect()
+    public void ActivateEffect(string name)
     {
-        Debug.Log("hit " + gameObject.name);
-        //if hit by attack (layer check on collider itself); activate effect (assuming no activation cooldown)
-        //Secondary case of already being active extending use case
-        //if (Time.time > last_activation_time + activation_cooldown || active) {
-            //aoe_field.SetActive(true);
-            //aoe_active = true;
-            //last_activation_time = Time.time;
-        //}
-
-        //activation rules:
-        //Should only activate once due to proper usage being with enter2d
-        aoe_field.SetActive(true);
-        aoe_active = true;
-        last_activation_time = Time.time;
+        if (!aoe_active && Time.time > last_activation_time + activation_cooldown)
+        {
+            Debug.Log("hit " + gameObject.name + " by " + name);
+            aoe_field.SetActive(true);
+            aoe_active = true;
+            last_activation_time = Time.time;
+        }
     }
 }
