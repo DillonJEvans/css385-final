@@ -5,8 +5,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class AttackScript : MonoBehaviour
 {
-    public List<GameObject> targets;
-    bool target_state;
     public GameObject lightning_bolt;
     public GameObject lightning_aoe;
     public float attack_cooldown;  //cooldown between attacks
@@ -15,7 +13,6 @@ public class AttackScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target_state = true;
     }
 
     // Update is called once per frame
@@ -41,13 +38,5 @@ public class AttackScript : MonoBehaviour
             lightning_aoe.SetActive(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            target_state = !target_state;
-            foreach (GameObject target in targets)
-            {
-                target.SetActive(target_state);
-            }
-        }
     }
 }
