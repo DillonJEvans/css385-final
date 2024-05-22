@@ -28,7 +28,7 @@ public class PitHazard : MonoBehaviour
         {
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
             enemy.currentHealth = 1;
-            enemy.TakeDamage();
+            enemy.TakeDamage(1);
         }
     }
 }
