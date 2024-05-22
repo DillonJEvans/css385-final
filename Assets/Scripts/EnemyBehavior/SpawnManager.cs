@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab2; // Prefab of the second type of enemy
     public float spawnIntervalMin = 2f; // Minimum time between spawns
     public float spawnIntervalMax = 5f; // Maximum time between spawns
+    public int initialEnemies = 5; // Number of enemies to spawn at the start
     public bool stop = false;
     public List<Transform> spawnpoints;
 
@@ -16,6 +17,11 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        // Spawn the initial wave of enemies
+        for (int i = 0; i < initialEnemies; i++)
+        {
+            SpawnEnemy();
+        }
         // Schedule the first spawn
         nextSpawnTime = Time.time + Random.Range(spawnIntervalMin, spawnIntervalMax);
     }

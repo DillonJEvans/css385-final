@@ -7,11 +7,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
     private NavMeshAgent agent;
     private Transform playerTransform; // Reference to the player's transform
     public float moveSpeed = 2f; // Speed at which the enemy moves towards the player
-    public float initialAlpha = 1.0f; // Initial alpha value
     public int initialHealth = 4; // Initial health of the enemy
     public int currentHealth; // Current health of the enemy
 
@@ -21,7 +19,6 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         agent = GetComponent<NavMeshAgent>();
         currentHealth = initialHealth;
 
@@ -51,14 +48,6 @@ public class EnemyController : MonoBehaviour
         {
             last_damage_time = Time.time;
             currentHealth--;
-
-            // Calculate new alpha value (80% of the previous value)
-            float newAlpha = Mathf.Clamp(spriteRenderer.color.a * 0.8f, 0f, 1f);
-
-            // Update alpha value
-            Color newColor = spriteRenderer.color;
-            newColor.a = newAlpha;
-            spriteRenderer.color = newColor;
 
             // Check if health is depleted
             if (currentHealth <= 0)
