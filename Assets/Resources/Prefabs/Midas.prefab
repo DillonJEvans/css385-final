@@ -521,7 +521,7 @@ MonoBehaviour:
   CameraFollower_: {fileID: 0}
   SpawnManager_: {fileID: 0}
   AimingReticle_: {fileID: 0}
-  initialHealth: 4
+  initialHealth: 20
   currentHealth: 0
 --- !u!114 &2295235405958294834
 MonoBehaviour:
@@ -552,4 +552,4 @@ MonoBehaviour:
   spawn_cooldown: 3
   drone_limit: 3
   drones: []
-  drone_prefab: {fileID: 9039191907640401854, guid: f746b9a186e42294782bd6e061962bb4, type: 3}
+  drone_prefab: {fileID: 9039191907640401854, guid: 70fdf1f8dd7ff6240813ad5a3dab365b, type: 3}
