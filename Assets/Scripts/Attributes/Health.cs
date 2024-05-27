@@ -1,3 +1,17 @@
+/**
+AUTHOR: Dillon Evans
+
+DESCRIPTION:
+Tracks and regenerates health and shields.
+
+HOW TO USE:
+1. Attach the Health component to the player or an NPC.
+2. Adjust the settings of the Health component in the Unity editor.
+3. Call Damage() in script whenever damage should be done.
+4. Add listeners to onDeath to call functions when the player/NPC dies.
+**/
+
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +26,7 @@ public class Health : MonoBehaviour
     [Tooltip("Whether or not health will regenerate.")]
     public bool healthRegeneration = false;
 
+
     [Header("Shield")]
     [Tooltip("Whether or not there is a shield.")]
     public bool hasShield = true;
@@ -21,6 +36,7 @@ public class Health : MonoBehaviour
     [Tooltip("Whether or not shield will regenerate.")]
     public bool shieldRegeneration = true;
 
+
     [Header("Regeneration")]
     [Tooltip("How long (in seconds) after taking damage before health/shield will begin to regenerate.")]
     [Min(0f)]
@@ -28,6 +44,7 @@ public class Health : MonoBehaviour
     [Tooltip("How quickly (in units per second) health/shield will regenerate.")]
     [Min(0f)]
     public float regenerationRate = 20f;
+
 
     [Header("Death")]
     [Tooltip("Whether or not to destroy this object when health reaches zero.")]
@@ -45,9 +62,14 @@ public class Health : MonoBehaviour
 
 
     private float timeSinceRegenerated = 0f;
+    private Coroutine delayRegeneration = null;
 
 
-    public void Damage(int damage)
+    // Damages the player or NPC.
+    // `Damage(damage)` should be used instead of `health -= damage`.
+    // Returns true if the player/NPC is still alive.
+    // Returns false if the player/NPC died.
+    public bool Damage(int damage)
     {
         if (hasShield)
         {
@@ -64,8 +86,10 @@ public class Health : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            return false;
         }
-        StartCoroutine(DelayRegeneration());
+        StartDelayingRegeneration();
+        return true;
     }
 
 
@@ -78,21 +102,25 @@ public class Health : MonoBehaviour
     private void Update()
     {
         if (!isRegenerating) return;
+        // Determine the amount to regenerate this frame.
         timeSinceRegenerated += Time.deltaTime;
         int regenerationAmount = Mathf.FloorToInt(timeSinceRegenerated * regenerationRate);
         timeSinceRegenerated -= regenerationAmount / regenerationRate;
+        // Regenerate health.
         if (healthRegeneration && health < maxHealth)
         {
             int healthRegenerationAmount = Mathf.Min(maxHealth - health, regenerationAmount);
             health += healthRegenerationAmount;
             regenerationAmount -= healthRegenerationAmount;
         }
+        // Regenerate shield.
         if (hasShield && shieldRegeneration && shield < maxShield)
         {
             int shieldRegenerationAmount = Mathf.Min(maxShield - shield, regenerationAmount);
             shield += shieldRegenerationAmount;
             regenerationAmount -= shieldRegenerationAmount;
         }
+        // Stop regenerating if at full health/shield.
         if (regenerationAmount > 0)
         {
             isRegenerating = false;
@@ -104,6 +132,22 @@ public class Health : MonoBehaviour
     {
         isRegenerating = false;
         yield return new WaitForSeconds(regenerationDelay);
+        StopDelayingRegeneration();
         isRegenerating = true;
+    }
+
+    private void StartDelayingRegeneration()
+    {
+        StopDelayingRegeneration();
+        delayRegeneration = StartCoroutine(DelayRegeneration());
+    }
+
+    private void StopDelayingRegeneration()
+    {
+        if (delayRegeneration != null)
+        {
+            StopCoroutine(delayRegeneration);
+            delayRegeneration = null;
+        }
     }
 }
