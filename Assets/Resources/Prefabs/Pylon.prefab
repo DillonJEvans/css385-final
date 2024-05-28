@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aoe_field: {fileID: 8048582121568948270}
   aoe_active: 0
-  activation_cooldown: 2
+  activation_cooldown: 0.5
   activation_time: 1
   uses_remaining: 3
   drones: []

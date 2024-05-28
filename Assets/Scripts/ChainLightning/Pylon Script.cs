@@ -16,7 +16,7 @@ public class PylonScript : MonoBehaviour
     public List<GameObject> drones;
     void Start()
     {
-        last_activation_time = -4;
+        last_activation_time = -activation_cooldown - 1f;
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class PylonScript : MonoBehaviour
 
     public void ActivateEffect(string name)
     {
-        if (!aoe_active)
+        if (!aoe_active && Time.time > last_activation_time + activation_cooldown)
         {
             Debug.Log("hit " + gameObject.name + " by " + name);
             aoe_field.SetActive(true);
