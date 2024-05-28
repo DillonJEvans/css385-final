@@ -7,7 +7,7 @@ Tracks and regenerates health and shields.
 HOW TO USE:
 1. Attach the Health component to the player or an NPC.
 2. Adjust the settings of the Health component in the Unity editor.
-3. Call Damage() in script whenever damage should be done.
+3. Call Damage() and/or Kill() in script whenever damage should be done.
 4. Add listeners to onDeath to call functions when the player/NPC dies.
 **/
 
@@ -80,16 +80,45 @@ public class Health : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            health = 0;
-            onDeath.Invoke(gameObject);
-            if(destroyOnDeath)
-            {
-                Destroy(gameObject);
-            }
+            Kill();
             return false;
         }
         StartDelayingRegeneration();
         return true;
+    }
+
+    // Damages the player or NPC over time.
+    // timeSinceLastDamaged should be initialized to a negative value,
+    //   and will then be managed by this function.
+    // Returns true if the player/NPC is still alive.
+    // Returns false if the player/NPC died.
+    public bool Damage(float damagePerSecond, ref float timeSinceLastDamaged)
+    {
+        int damage;
+        if (timeSinceLastDamaged < 0f)
+        {
+            timeSinceLastDamaged = 0f;
+            damage = 1;
+        }
+        else
+        {
+            timeSinceLastDamaged += Time.deltaTime;
+            damage = Mathf.FloorToInt(damagePerSecond * timeSinceLastDamaged);
+            timeSinceLastDamaged -= damage / damagePerSecond;
+        }
+        return Damage(damage);
+    }
+
+    // Kills the player or NPC.
+    // `Kill()` should be used instead of `Destroy(gameObject)`.
+    public void Kill()
+    {
+        health = 0;
+        onDeath.Invoke(gameObject);
+        if(destroyOnDeath)
+        {
+            Destroy(gameObject);
+        }
     }
 
 

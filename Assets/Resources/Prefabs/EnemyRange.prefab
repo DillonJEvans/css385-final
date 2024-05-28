@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 9125385530644309661}
   - component: {fileID: 7568495777457733289}
   - component: {fileID: 6254914471401472628}
+  - component: {fileID: 1150011543755829718}
   m_Layer: 8
   m_Name: EnemyRange
   m_TagString: Enemy
@@ -315,7 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769103491937ea0408fa847053011878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage_cooldown: 0.5
+  playerTag: Player
+  damagePerSecond: 2
 --- !u!195 &6254914471401472628
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -338,6 +340,32 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1150011543755829718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095196481950726619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a98b8ab5a083d4a85e3f1e1b1f5b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 9
+  healthRegeneration: 1
+  hasShield: 0
+  maxShield: 100
+  shieldRegeneration: 1
+  regenerationDelay: 5
+  regenerationRate: 1
+  destroyOnDeath: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  health: 0
+  shield: 0
+  isRegenerating: 0
 --- !u!1 &3266442629230263383
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,8 +454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078bb2843641eef42a3f1577bd6971c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  enemy: {fileID: 623960587317143560}
+  health: {fileID: 1150011543755829718}
+  useShield: 0
+  mana: {fileID: 0}
   bar: {fileID: 5318525311759302972}
   barMinimumColor: {r: 1, g: 0, b: 0, a: 1}
   barMedianColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

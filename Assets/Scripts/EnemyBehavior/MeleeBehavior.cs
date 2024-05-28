@@ -1,35 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Collider2D))]
 public class MeleeBehavior : MonoBehaviour
 {
-    private GameObject player;
-    //Dps Revision
-    private float last_damage_time;
-    public float damage_cooldown = 0.5f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.Find("Midas");
-    }
+    public string playerTag = "Player";
+    public float damagePerSecond = 2f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    void OnTriggerStay2D(Collider2D other)
+    private Health player = null;
+    private float timeLastDamaged = -1f;
+
+
+    private void Start()
     {
-        if (Time.time > last_damage_time + damage_cooldown)
+        GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
+        if (!playerObject)
         {
-            last_damage_time = Time.time;
-            // Check if the collider belongs to an enemy
-            if (other.gameObject.CompareTag("Player"))
-            {
-                player.GetComponent<PlayerController2>().TakeDamage();
-            }
+            Debug.Log(name + " failed to find the player (no object with the tag \"" + playerTag + "\").");
+        }
+        if (!playerObject.TryGetComponent(out player))
+        {
+            Debug.Log(name + " failed to find the player's health component.");
+        }
+    }
+
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (player && collider.gameObject == player.gameObject)
+        {
+            player.Damage(damagePerSecond, ref timeLastDamaged);
         }
     }
 }

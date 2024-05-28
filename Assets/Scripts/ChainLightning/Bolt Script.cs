@@ -1,24 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Collider2D))]
 public class BoltScript : MonoBehaviour
 {
-    public int damage;
-    private void OnTriggerStay2D(Collider2D collision)
+    public int damage = 3;
+    public LayerMask enemies;
+
+
+    private float timeSinceLastDamaged = -1f;
+
+
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        Debug.Log(gameObject.name + " Hit: " + collision.gameObject.name);
-        if (collision.gameObject.layer == 8 && collision.gameObject != gameObject.transform.parent.gameObject)
+        Debug.Log(name + " Hit: " + collider.name);
+        int layer = collider.gameObject.layer;
+        // Enemy
+        if (IsLayerInMask(enemies, layer) && collider.TryGetComponent(out Health enemy))
         {
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            enemy.Damage(damage, ref timeSinceLastDamaged);
         }
-        else if (collision.gameObject.layer == 7)// && collision.gameObject != gameObject.transform.parent.gameObject)
+        // Pylon
+        else if (TryGetComponent(out PylonScript pylon))
         {
-            collision.gameObject.GetComponent<PylonScript>().ActivateEffect(gameObject.name);
+            pylon.ActivateEffect(name);
         }
-        else if (collision.gameObject.layer == 13)
+        // Landmine
+        else if (TryGetComponent(out Landmine landmine))
         {
-            collision.gameObject.GetComponent<Landmine>().Explode();
+            landmine.Explode();
         }
+    }
+
+
+    // https://forum.unity.com/threads/checking-if-a-layer-is-in-a-layer-mask.1190230/
+    private bool IsLayerInMask(LayerMask mask, int layer)
+    {
+        return (mask & (1 << layer)) != 0;
     }
 }

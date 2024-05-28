@@ -6,7 +6,7 @@ A status bar for displaying things like health or mana.
 
 HOW TO USE:
 1. Attach the StatusBar component to an object.
-2. Set either the player or the enemy that the status bar is for.
+2. Set either the health or mana that the status bar is for.
 3. Set the bar and/or text objects.
 4. Adjust the settings in the Unity editor.
 
@@ -23,15 +23,20 @@ public class StatusBar : MonoBehaviour
 {
     [Header("Target")]
     [Tooltip(
-        "The player whose health will be used for the status bar.\n" +
-        "Either player or enemy should not be null."
+        "The health that will be used for the status bar.\n" +
+        "Either health or mana should be null."
     )]
-    public PlayerController2 player = null;
+    public Health health = null;
     [Tooltip(
-        "The enemy whose health will be used for the status bar.\n" +
-        "Either player or enemy should not be null."
+        "Whether or not the status bar is for shield or health.\n" +
+        "Only considered if health is not null."
     )]
-    public EnemyController enemy = null;
+    public bool useShield = false;
+    [Tooltip(
+        "The mana that will be used for the status bar.\n" +
+        "Either health or mana should be null."
+    )]
+    public Mana mana = null;
 
 
     [Header("Bar")]
@@ -40,6 +45,8 @@ public class StatusBar : MonoBehaviour
         "Will not display a status bar if this is null."
     )]
     public Image bar = null;
+    [Tooltip("Whether or not to update the color of the status bar.")]
+    public bool updateColor = true;
     [Tooltip("Color of the status bar at 0%.")]
     public Color barMinimumColor = Color.red;
     [Tooltip("Color of the status bar at 50%.")]
@@ -95,15 +102,23 @@ public class StatusBar : MonoBehaviour
 
     private void UpdateValue()
     {
-        if (player)
+        if (health)
         {
-            currentValue = player.currentHealth;
-            maximumValue = player.initialHealth;
+            if (useShield)
+            {
+                currentValue = health.shield;
+                maximumValue = health.maxShield;
+            }
+            else
+            {
+                currentValue = health.health;
+                maximumValue = health.maxHealth;
+            }
         }
-        else if (enemy)
+        else if (mana)
         {
-            currentValue = enemy.currentHealth;
-            maximumValue = enemy.initialHealth;
+            currentValue = mana.mana;
+            maximumValue = mana.maxMana;
         }
         else
         {
@@ -126,6 +141,7 @@ public class StatusBar : MonoBehaviour
         position.x = initialBarX - widthDelta / 2f;
         rt.anchoredPosition = position;
         // Update color.
+        if (!updateColor) return;
         if (valuePercent <= 0.5f)
         {
             bar.color = Color.Lerp(barMinimumColor, barMedianColor, valuePercent * 2f);

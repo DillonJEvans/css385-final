@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Landmine : MonoBehaviour
@@ -58,13 +56,14 @@ public class Landmine : MonoBehaviour
     {
         foreach (GameObject obj in objects_in_radius)
         {
+            
             if (obj != null && obj.layer == 8)
             {
-                obj.GetComponent<EnemyController>().TakeDamage(damage);
+                obj.GetComponent<Health>().Damage(damage);
             }
             else if (obj != null && obj.layer == 9)
             {
-                obj.GetComponent<PlayerController2>().TakeDamage();
+                obj.GetComponent<Health>().Damage(1);
             }
             else
             {
