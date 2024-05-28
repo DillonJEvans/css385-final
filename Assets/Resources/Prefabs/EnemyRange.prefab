@@ -208,10 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57608679d8b7bb94aa36fcb8a2d3a6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  initialHealth: 9
-  currentHealth: 0
-  damage_cooldown: 0.5
+  playerTag: Player
 --- !u!50 &-8551765723650356309
 Rigidbody2D:
   serializedVersion: 4
@@ -298,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8958034172776746084, guid: b8888a229d2817f4cbdd54c32e67d8c0, type: 3}
-  projectileSpeed: 5
+  projectileSpeed: 8
   projectileCooldown: 2
   mediumRange: 5
   obstacles:
@@ -317,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
-  damagePerSecond: 2
+  damagePerSecond: 20
 --- !u!195 &6254914471401472628
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -352,13 +349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a98b8ab5a083d4a85e3f1e1b1f5b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 9
+  maxHealth: 100
   healthRegeneration: 1
   hasShield: 0
   maxShield: 100
   shieldRegeneration: 1
   regenerationDelay: 5
-  regenerationRate: 1
+  regenerationRate: 20
   destroyOnDeath: 1
   onDeath:
     m_PersistentCalls:
@@ -458,6 +455,7 @@ MonoBehaviour:
   useShield: 0
   mana: {fileID: 0}
   bar: {fileID: 5318525311759302972}
+  updateColor: 1
   barMinimumColor: {r: 1, g: 0, b: 0, a: 1}
   barMedianColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   barMaximumColor: {r: 0, g: 1, b: 0, a: 1}

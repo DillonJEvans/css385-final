@@ -56,14 +56,9 @@ public class Landmine : MonoBehaviour
     {
         foreach (GameObject obj in objects_in_radius)
         {
-            
-            if (obj != null && obj.layer == 8)
+            if (obj.TryGetComponent(out Health health))
             {
-                obj.GetComponent<Health>().Damage(damage);
-            }
-            else if (obj != null && obj.layer == 9)
-            {
-                obj.GetComponent<Health>().Damage(1);
+                health.Damage(damage);
             }
             else
             {

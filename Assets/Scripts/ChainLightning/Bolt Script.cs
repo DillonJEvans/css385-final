@@ -14,6 +14,10 @@ public class BoltScript : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collider)
     {
         Debug.Log(name + " Hit: " + collider.name);
+        if (collider.gameObject == transform.parent.gameObject)
+        {
+            return;
+        }
         int layer = collider.gameObject.layer;
         // Enemy
         if (IsLayerInMask(enemies, layer) && collider.TryGetComponent(out Health enemy))
@@ -21,12 +25,12 @@ public class BoltScript : MonoBehaviour
             enemy.Damage(damage, ref timeSinceLastDamaged);
         }
         // Pylon
-        else if (TryGetComponent(out PylonScript pylon))
+        else if (collider.TryGetComponent(out PylonScript pylon))
         {
             pylon.ActivateEffect(name);
         }
         // Landmine
-        else if (TryGetComponent(out Landmine landmine))
+        else if (collider.TryGetComponent(out Landmine landmine))
         {
             landmine.Explode();
         }

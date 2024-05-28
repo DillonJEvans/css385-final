@@ -163,4 +163,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769103491937ea0408fa847053011878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage_cooldown: 0.5
+  playerTag: Player
+  damagePerSecond: 20

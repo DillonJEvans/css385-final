@@ -39,7 +39,7 @@ public class PylonScript : MonoBehaviour
 
     public void ActivateEffect(string name)
     {
-        if (!aoe_active && Time.time > last_activation_time + activation_cooldown)
+        if (!aoe_active)
         {
             Debug.Log("hit " + gameObject.name + " by " + name);
             aoe_field.SetActive(true);

@@ -207,10 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57608679d8b7bb94aa36fcb8a2d3a6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  initialHealth: 9
-  currentHealth: 0
-  damage_cooldown: 0.5
+  playerTag: Player
 --- !u!50 &-8551765723650356309
 Rigidbody2D:
   serializedVersion: 4
@@ -297,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
-  damagePerSecond: 2
+  damagePerSecond: 20
 --- !u!195 &6254914471401472628
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -332,13 +329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a98b8ab5a083d4a85e3f1e1b1f5b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 9
+  maxHealth: 100
   healthRegeneration: 1
   hasShield: 0
   maxShield: 100
   shieldRegeneration: 1
   regenerationDelay: 5
-  regenerationRate: 1
+  regenerationRate: 20
   destroyOnDeath: 1
   onDeath:
     m_PersistentCalls:

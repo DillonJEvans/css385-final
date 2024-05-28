@@ -540,6 +540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawn_cooldown: 3
   drone_limit: 3
+  drone_mana: 50
   drones: []
   drone_prefab: {fileID: 9039191907640401854, guid: 70fdf1f8dd7ff6240813ad5a3dab365b, type: 3}
 --- !u!114 &78994274936708549
@@ -554,13 +555,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a98b8ab5a083d4a85e3f1e1b1f5b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   healthRegeneration: 0
   hasShield: 1
-  maxShield: 10
+  maxShield: 100
   shieldRegeneration: 1
   regenerationDelay: 2
-  regenerationRate: 2
+  regenerationRate: 20
   destroyOnDeath: 1
   onDeath:
     m_PersistentCalls:
