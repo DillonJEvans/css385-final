@@ -136,6 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 60
+  enemies:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &9039191907640401854
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,8 +308,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aoe_field: {fileID: 8048582121568948270}
   aoe_active: 0
-  activation_cooldown: 2
+  activation_cooldown: 0.5
   activation_time: 1
+  uses_remaining: 3
+  drones: []
 --- !u!58 &8828025582987170180
 CircleCollider2D:
   m_ObjectHideFlags: 0

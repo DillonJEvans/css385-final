@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,54 +5,28 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private Transform playerTransform; // Reference to the player's transform
-    public float moveSpeed = 2f; // Speed at which the enemy moves towards the player
-    public int initialHealth = 4; // Initial health of the enemy
-    public int currentHealth; // Current health of the enemy
+    public string playerTag = "Player";
 
-    //Dps Revision
-    private float last_damage_time;
-    public float damage_cooldown = 0.5f;
 
-    void Start()
+    private NavMeshAgent navMeshAgent = null;
+    private GameObject player = null;
+
+
+    private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        currentHealth = initialHealth;
-
-        // Find the player GameObject and get its transform
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag(playerTag);
         // Stop the agent from rotating to face the player,
         // which would cause them to not be visible to the camera.
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
     }
 
-    void Update()
+    private void Update()
     {
-        // Move towards the player
-        if (playerTransform != null)
+        if (player)
         {
-            // Vector3 direction = (playerTransform.position - transform.position).normalized;
-            // transform.position += direction * moveSpeed * Time.deltaTime;
-            agent.destination = playerTransform.position;
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        if (Time.time > last_damage_time + damage_cooldown)
-        {
-            last_damage_time = Time.time;
-            currentHealth -= damage;
-
-            // Check if health is depleted
-            if (currentHealth <= 0)
-            {
-                currentHealth = 0;
-                Destroy(gameObject);
-            }
+            navMeshAgent.destination = player.transform.position;
         }
     }
 }

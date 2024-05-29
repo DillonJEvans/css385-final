@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
+  enemies:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &7285166040472224895
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,8 +160,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5898960446709961064}
   - component: {fileID: 561412348202143988}
-  - component: {fileID: 6410718676473121164}
   - component: {fileID: 7598102260300939413}
+  - component: {fileID: 6410718676473121164}
   m_Layer: 6
   m_Name: Wide Attack
   m_TagString: Untagged
@@ -235,19 +238,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6410718676473121164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7285166040472224895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
 --- !u!60 &7598102260300939413
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -303,6 +293,22 @@ PolygonCollider2D:
       - {x: 0.19088487, y: 0.12171577}
       - {x: 0.09538903, y: 0.16638073}
   m_UseDelaunayMesh: 0
+--- !u!114 &6410718676473121164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285166040472224895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  enemies:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &8076866322415383847
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,9 +323,11 @@ GameObject:
   - component: {fileID: 3549321622212284222}
   - component: {fileID: 7611780237427624706}
   - component: {fileID: 3747789978573295841}
-  - component: {fileID: 519948606600580927}
   - component: {fileID: 2295235405958294834}
   - component: {fileID: 1843088355015584357}
+  - component: {fileID: 78994274936708549}
+  - component: {fileID: 2273100598839029281}
+  - component: {fileID: -328610147189332323}
   m_Layer: 9
   m_Name: Midas
   m_TagString: Player
@@ -504,25 +512,6 @@ MonoBehaviour:
   yAxisName: Aim Vertical
   useRawInput: 1
   deadzone: 0.19
---- !u!114 &519948606600580927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8076866322415383847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a02b27a4c9e43146a9c739aabdd29f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  projectilePrefab: {fileID: 6778248608282619850, guid: b859a0bcff3dd754bafc86fee07783f5, type: 3}
-  CameraFollower_: {fileID: 0}
-  SpawnManager_: {fileID: 0}
-  AimingReticle_: {fileID: 0}
-  initialHealth: 20
-  currentHealth: 0
 --- !u!114 &2295235405958294834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,5 +540,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawn_cooldown: 3
   drone_limit: 3
+  drone_mana: 50
   drones: []
   drone_prefab: {fileID: 9039191907640401854, guid: 70fdf1f8dd7ff6240813ad5a3dab365b, type: 3}
+--- !u!114 &78994274936708549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076866322415383847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a98b8ab5a083d4a85e3f1e1b1f5b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthRegeneration: 0
+  hasShield: 1
+  maxShield: 100
+  shieldRegeneration: 1
+  regenerationDelay: 2
+  regenerationRate: 20
+  destroyOnDeath: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2273100598839029281}
+        m_TargetAssemblyTypeName: PlayerDeathManager, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  health: 0
+  shield: 0
+  isRegenerating: 0
+--- !u!114 &2273100598839029281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076866322415383847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc82a616c2c69543bda3ae3122255c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnDeath: []
+  destroyOnDeath: []
+--- !u!114 &-328610147189332323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076866322415383847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8621f04373b807b43aa8464ed2fdb063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMana: 100
+  regeneration: 1
+  regenerationDelay: 2
+  regenerationRate: 20
+  mana: 0
+  isRegenerating: 0

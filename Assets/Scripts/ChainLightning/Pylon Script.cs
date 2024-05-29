@@ -16,7 +16,7 @@ public class PylonScript : MonoBehaviour
     public List<GameObject> drones;
     void Start()
     {
-        last_activation_time = -4;
+        last_activation_time = -activation_cooldown - 1f;
     }
 
     void Update()
