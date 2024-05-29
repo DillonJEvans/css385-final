@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.15294118, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.15294118, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 60
   enemies:
     serializedVersion: 2
     m_Bits: 256
@@ -228,7 +228,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: -7235175782488663740, guid: 8a12681343098054e920232317b8325a, type: 3}
-  m_Color: {r: 1, g: 0.09019608, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.09019608, b: 0, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47dfb0260f873764d99a5daa28be9446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 80
   enemies:
     serializedVersion: 2
     m_Bits: 256
@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 78994274936708549}
   - component: {fileID: 2273100598839029281}
   - component: {fileID: -328610147189332323}
+  - component: {fileID: 2004078418586943368}
   m_Layer: 9
   m_Name: Midas
   m_TagString: Player
@@ -493,6 +494,7 @@ MonoBehaviour:
   yAxisName: Vertical
   useRawInput: 1
   deadzone: 0.19
+  midasAnimator: {fileID: 0}
 --- !u!114 &3747789978573295841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightning_bolt: {fileID: 6221416713962491531}
   lightning_aoe: {fileID: 7285166040472224895}
+  midasAnimator: {fileID: 0}
 --- !u!114 &1843088355015584357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,11 +541,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc6fe18469210a4a9b623922d574b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn_cooldown: 3
+  spawn_cooldown: 1
   drone_limit: 3
-  drone_mana: 50
+  drone_mana: 80
   drones: []
   drone_prefab: {fileID: 9039191907640401854, guid: 70fdf1f8dd7ff6240813ad5a3dab365b, type: 3}
+  droneText: {fileID: 0}
 --- !u!114 &78994274936708549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +585,8 @@ MonoBehaviour:
   health: 0
   shield: 0
   isRegenerating: 0
+  enemyAnimator: {fileID: 0}
+  enemyText: {fileID: 0}
 --- !u!114 &2273100598839029281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,8 +599,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc82a616c2c69543bda3ae3122255c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableOnDeath: []
-  destroyOnDeath: []
+  disableOnDeath:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  destroyOnDeath:
+  - {fileID: 0}
 --- !u!114 &-328610147189332323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,3 +623,18 @@ MonoBehaviour:
   regenerationRate: 20
   mana: 0
   isRegenerating: 0
+--- !u!114 &2004078418586943368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076866322415383847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a6478cc15a08a40bbfe46522085b0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  survivalTime: 0
+  isCounting: 1
+  timerText: {fileID: 0}
