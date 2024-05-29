@@ -68,10 +68,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2d = null;
     private Vector2 acceleration = Vector2.zero;
 
+    public Animator midasAnimator;
+
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        GetComponent<SpriteRenderer>().enabled = false;
+        midasAnimator.SetBool("isWalking", false);
     }
 
     private void Update()
@@ -89,6 +93,15 @@ public class PlayerMovement : MonoBehaviour
             ref acceleration,
             accelerationTime
         );
+
+        if (rb2d.velocity != Vector2.zero)
+        {
+            midasAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            midasAnimator.SetBool("isWalking", false);
+        }
     }
 
 

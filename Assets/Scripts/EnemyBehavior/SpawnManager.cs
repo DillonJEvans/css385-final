@@ -15,6 +15,8 @@ public class SpawnManager : MonoBehaviour
 
     private float nextSpawnTime; // Time to spawn the next enemy
 
+    public EnemyCounter enemyCounter_;
+
     void Start()
     {
         // Spawn the initial wave of enemies
@@ -52,6 +54,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPosition = spawnpoints[index].position;
 
         // Instantiate the chosen type of enemy at the calculated position
-        Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+        enemy.GetComponent<Health>().enemyCounter = enemyCounter_;
     }
 }

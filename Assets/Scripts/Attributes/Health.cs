@@ -15,6 +15,7 @@ HOW TO USE:
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 
 public class Health : MonoBehaviour
@@ -63,7 +64,10 @@ public class Health : MonoBehaviour
 
     private float timeSinceRegenerated = 0f;
     private Coroutine delayRegeneration = null;
-
+    public Animator enemyAnimator;
+    
+    public EnemyCounter enemyCounter;
+    public GameObject Player_Animation; //only exists in the context of the player
 
     // Damages the player or NPC.
     // `Damage(damage)` should be used instead of `health -= damage`.
@@ -81,6 +85,12 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             Kill();
+            if (gameObject.CompareTag("Enemy"))
+            {
+                //StartCoroutine(EnemyDeathAnimator());
+                Debug.Log("Enemy Died");
+                enemyCounter.UpdateCount();
+            }
             return false;
         }
         StartDelayingRegeneration();
@@ -117,6 +127,10 @@ public class Health : MonoBehaviour
         onDeath.Invoke(gameObject);
         if(destroyOnDeath)
         {
+            if (gameObject.layer == 9)
+            {
+                Destroy(Player_Animation);
+            }
             Destroy(gameObject);
         }
     }
