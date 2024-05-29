@@ -11,6 +11,8 @@ public class MeleeBehavior : MonoBehaviour
     private Health player = null;
     private float timeLastDamaged = -1f;
 
+    public Animator meleeAnimator;
+
 
     private void Start()
     {
@@ -31,6 +33,15 @@ public class MeleeBehavior : MonoBehaviour
         if (player && collider.gameObject == player.gameObject)
         {
             player.Damage(damagePerSecond, ref timeLastDamaged);
+            meleeAnimator.SetBool("isAttacking", true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (player && collider.gameObject == player.gameObject)
+        {
+            meleeAnimator.SetBool("isAttacking", false);
         }
     }
 }

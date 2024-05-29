@@ -18,6 +18,7 @@ public class RangeBehavior : MonoBehaviour
     private Transform firePoint;
     private EnemyController enemyController;
     private NavMeshAgent agent;
+    public Animator rangeAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class RangeBehavior : MonoBehaviour
             // Check if enough time has passed since the last shot
             if (Time.time >= lastShotTime + projectileCooldown)
             {
+                rangeAnimator.SetBool("isAttacking", true);
                 Shoot();
                 lastShotTime = Time.time;
             }
@@ -48,6 +50,7 @@ public class RangeBehavior : MonoBehaviour
         {
             // Chase the player.
             enemyController.enabled = true;
+            rangeAnimator.SetBool("isAttacking", false);
         }
     }
 

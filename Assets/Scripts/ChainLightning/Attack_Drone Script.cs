@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 [RequireComponent(typeof(Mana))]
@@ -13,6 +14,7 @@ public class Attack_DroneScript : MonoBehaviour
     public GameObject drone_prefab;
 
     int count;
+    public TMP_Text droneText;
 
     private Mana mana = null;
 
@@ -35,8 +37,9 @@ public class Attack_DroneScript : MonoBehaviour
                 GameObject newdrone = Instantiate(drone_prefab, transform.position, transform.rotation);
                 drones.Add(newdrone);
                 newdrone.GetComponent<PylonScript>().drones = drones;
-                newdrone.name = "drone" + count++;
+                newdrone.name = "drone" + count;
                 last_spawn_time = Time.time;
+                IncrementCount();
             }
             if (Input.GetKey(KeyCode.Q) && drones.Count < drone_limit && mana.UseMana(drone_mana))
             {
@@ -44,10 +47,23 @@ public class Attack_DroneScript : MonoBehaviour
                 GameObject newdrone = Instantiate(drone_prefab, transform.position, transform.rotation);
                 drones.Add(newdrone);
                 newdrone.GetComponent<PylonScript>().drones = drones;
-                newdrone.name = "drone" + count++;
+                newdrone.name = "drone" + count;
                 newdrone.GetComponent<PylonNav>().target_player = true;
                 last_spawn_time = Time.time;
+                IncrementCount();
             }
         }
+    }
+
+    public void IncrementCount()
+    {
+        count++;
+        droneText.text = "Drones Deployed: " + count;
+    }
+
+    public void DecrementCount()
+    {
+        count--;
+        droneText.text = "Drones Deployed: " + count;
     }
 }

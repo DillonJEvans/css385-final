@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     public string playerTag = "Player";
+    public EnemyVisualBehavior visualBehavior;
 
 
     private NavMeshAgent navMeshAgent = null;
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         // which would cause them to not be visible to the camera.
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void Update()
@@ -27,6 +29,16 @@ public class EnemyController : MonoBehaviour
         if (player)
         {
             navMeshAgent.destination = player.transform.position;
+        }
+
+        // Face the direction the agent is moving.
+        if (navMeshAgent.velocity.x > 0)
+        {
+            visualBehavior.FaceRight();
+        }
+        else if (navMeshAgent.velocity.x < 0)
+        {
+            visualBehavior.FaceLeft();
         }
     }
 }

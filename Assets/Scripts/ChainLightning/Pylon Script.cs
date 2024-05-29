@@ -13,10 +13,13 @@ public class PylonScript : MonoBehaviour
 
     public int uses_remaining = 3;
 
+    public Attack_DroneScript counter;
+
     public List<GameObject> drones;
     void Start()
     {
         last_activation_time = -activation_cooldown - 1f;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Update()
@@ -28,7 +31,7 @@ public class PylonScript : MonoBehaviour
             aoe_field.SetActive(false);
             aoe_active = false;
             uses_remaining--;
-            if (uses_remaining == 0)
+            if (uses_remaining <= 0)
             {
                 drones.Remove(gameObject);
                 Destroy(gameObject);
