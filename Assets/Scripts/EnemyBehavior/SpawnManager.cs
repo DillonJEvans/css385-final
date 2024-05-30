@@ -34,9 +34,15 @@ public class SpawnManager : MonoBehaviour
 
     private float startTime;
     private float nextSpawnTime; // Time to spawn the next enemy
+    public bool start = false;
 
 
     void Start()
+    {
+        
+    }
+
+    public void StartSpawn()
     {
         startTime = Time.time;
         // Schedule the first spawn
@@ -46,12 +52,14 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnEnemy();
         }
+        start = true;
+
     }
 
     void Update()
     {
         // Check if it's time to spawn a new enemy
-        if (Time.time >= nextSpawnTime)
+        if (Time.time >= nextSpawnTime  && start)
         {
             SpawnEnemy();
 

@@ -16,6 +16,8 @@ using UnityEngine;
 
 using static InputUtils;
 
+using TMPro;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -81,12 +83,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 acceleration = Vector2.zero;
     private float timeSinceLastUsedStamina = -1f;
 
+    public GameController gameController;
+    public TMP_Text gearCount;
+
 
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         GetComponent<SpriteRenderer>().enabled = false;
         if (animator) animator.SetBool(movingState, false);
+        gearCount.text = "Gears Collected: 0";
     }
 
     private void Update()
@@ -159,6 +165,20 @@ public class PlayerMovement : MonoBehaviour
                 return fastSpeed;
             default:
                 return 0f;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Gear"))
+        {
+            other.gameObject.SetActive(false);
+            gameController.gearsCollected++;
+            gearCount.text = "Gears Collected: " + gameController.gearsCollected + "/" + gameController.maxGear;
+            if (gameController.gearsCollected >= gameController.maxGear)
+            {
+                gameController.Win();
+            }
         }
     }
 }
