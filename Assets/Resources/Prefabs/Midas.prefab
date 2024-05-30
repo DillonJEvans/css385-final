@@ -499,6 +499,7 @@ MonoBehaviour:
   deadzone: 0.19
   animator: {fileID: 0}
   movingState: isWalking
+  minMovingSpeed: 0.5
 --- !u!114 &3747789978573295841
 MonoBehaviour:
   m_ObjectHideFlags: 0

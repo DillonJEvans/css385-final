@@ -67,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator = null;
     [Tooltip("Name of the animator's moving state.")]
     public string movingState = "isWalking";
+    [Tooltip("The minimum speed that is considered moving.")]
+    public float minMovingSpeed = 0.1f;
 
 
     public Vector2 direction { get; private set; } = Vector2.zero;
@@ -102,8 +104,11 @@ public class PlayerMovement : MonoBehaviour
             ref acceleration,
             accelerationTime
         );
-        bool isMoving = rb2d.velocity != Vector2.zero;
-        if (animator) animator.SetBool(movingState, isMoving);
+        if (animator)
+        {
+            bool isMoving = rb2d.velocity.sqrMagnitude > minMovingSpeed * minMovingSpeed;
+            animator.SetBool(movingState, isMoving);
+        }
     }
 
 
