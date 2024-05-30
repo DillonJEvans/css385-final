@@ -11,13 +11,18 @@ public class GameController : MonoBehaviour
     public SpawnManager spawnManager;
     public int maxGear;
     public int gearsCollected = 0;
+
+    private float originalTimeScale;
+
     // Start is called before the first frame update
     void Start()
     {
         startScreen.SetActive(true);
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
-
+        // Pause the game.
+        originalTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
     }
 
     public void Easy() 
@@ -25,6 +30,7 @@ public class GameController : MonoBehaviour
         startScreen.SetActive(false);
         maxGear = 5;
         spawnManager.StartSpawn();
+        Time.timeScale = originalTimeScale;
     }
 
     public void Hard() 
@@ -32,6 +38,7 @@ public class GameController : MonoBehaviour
         startScreen.SetActive(false);
         maxGear = 10;
         spawnManager.StartSpawn();
+        Time.timeScale = originalTimeScale;
     }   
 
     // Update is called once per frame
